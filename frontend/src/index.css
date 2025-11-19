@@ -1,0 +1,431 @@
+:root {
+  /* Light theme */
+  --background-light: #f4f5fb;
+  --surface-light: #ffffff;
+  --text-light: #222222;
+
+  /* Professional dark (not too dark) */
+  --background-dark: #20252f;
+  --surface-dark: #262c37;
+  --text-dark: #f3f4f6;
+
+  --primary: #ff7043;
+  --primary-soft: #ffe0d1;
+  --accent: #ffc857;
+
+  --error: #ff4d4f;
+}
+
+/* theme bindings */
+[data-theme="light"] {
+  --bg-color: var(--background-light);
+  --surface-color: var(--surface-light);
+  --text-color: var(--text-light);
+  --button-bg: var(--primary);
+  --button-text: #ffffff;
+}
+
+[data-theme="dark"] {
+  --bg-color: var(--background-dark);
+  --surface-color: var(--surface-dark);
+  --text-color: var(--text-dark);
+  --button-bg: #ff8a65;
+  --button-text: #111827;
+}
+
+/* global */
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* APP SHELL */
+.app-shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 16px 40px;
+}
+
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.weather-text {
+  margin: 4px 0 0;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+.weather-text span {
+  font-weight: 600;
+}
+
+/* theme toggle */
+.theme-toggle-btn {
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  transition: background-color 0.2s ease, transform 0.1s ease,
+    box-shadow 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+  background-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.22);
+}
+
+.theme-toggle-btn.secondary-toggle {
+  box-shadow: none;
+}
+
+/* MAIN LAYOUT */
+.app-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* left column: location + loading text below */
+.top-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+/* status texts */
+.loading-text {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.error-text {
+  margin: 0;
+  color: var(--error);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* filter section on right */
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.filter-group.horizontal {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.filter-group label {
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+.filter-group select {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(107, 114, 128, 0.5);
+  background-color: var(--surface-color);
+  color: var(--text-color);
+}
+
+/* recommendation list wrapper */
+.list-section {
+  margin-top: 8px;
+}
+
+/* FOOD CARDS */
+.food-card {
+  cursor: pointer;
+  background-color: var(--surface-color);
+  border-radius: 12px;
+  padding: 12px;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
+}
+
+.food-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.25);
+}
+
+/* HOME / INITIAL SCREEN */
+.initial-screen {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-image: url("assets/food_background.jpg");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.initial-overlay {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.35),
+    rgba(0, 0, 0, 0.55)
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* make card readable in both themes */
+.initial-card {
+  background: var(--surface-color);
+  color: var(--text-color);
+  max-width: 480px;
+  width: 90%;
+  padding: 24px 20px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+}
+
+.initial-card h1 {
+  margin: 0 0 8px;
+}
+
+.initial-card p {
+  margin: 0 0 16px;
+  font-size: 0.98rem;
+}
+
+.initial-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+/* start button */
+.start-button {
+  font-size: 1.05rem;
+  padding: 0.85rem 1.8rem;
+  cursor: pointer;
+  border-radius: 999px;
+  border: none;
+  background: #ffffff;
+  color: #333333;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: background 0.3s ease, color 0.3s ease, transform 0.1s ease,
+    box-shadow 0.2s ease;
+}
+
+.start-button:hover {
+  background: var(--primary);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+
+/* MODAL */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 23, 42, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  position: relative;
+  width: 600px;
+  max-width: 90vw;
+  background: var(--surface-color);
+  border-radius: 14px;
+  padding: 20px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.modal-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.price {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+/* modal buttons row: left group + order button on right */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.button-group-left {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.button-group button {
+  padding: 8px 15px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 999px;
+  border: none;
+  color: var(--button-text);
+  background-color: var(--button-bg);
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+}
+
+.button-group button:hover:not(:disabled) {
+  background-color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.button-group button:disabled {
+  background-color: rgba(148, 163, 184, 0.85);
+  cursor: not-allowed;
+}
+
+/* Order now anchor styled like a button */
+.order-button {
+  padding: 8px 15px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 999px;
+  background-color: var(--button-bg);
+  color: var(--button-text);
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.18);
+  transition: background-color 0.2s ease-in-out, transform 0.1s ease,
+    box-shadow 0.2s ease;
+}
+
+.order-button:hover {
+  background-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.22);
+}
+
+/* tabs inside modal */
+.toggle-buttons {
+  display: flex;
+  gap: 8px;
+  margin: 16px 0 8px;
+  flex-wrap: wrap;
+}
+
+.toggle-buttons button {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: none;
+  background-color: rgba(148, 163, 184, 0.35);
+  color: var(--text-color);
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.toggle-buttons button.active {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+/* content sections */
+.content-section {
+  min-height: 150px;
+}
+
+.recipe-section,
+.description-section {
+  margin-top: 8px;
+  line-height: 1.5;
+}
+
+.recipe-section h3,
+.description-section h3 {
+  margin-top: 0;
+}
+
+/* video iframe */
+iframe {
+  margin-top: 12px;
+  border-radius: 12px;
+  border: none;
+  width: 100%;
+}
+
+/* responsive */
+@media (max-width: 768px) {
+  .app-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .top-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .modal-content {
+    max-width: 95vw;
+    padding: 16px;
+  }
+}
